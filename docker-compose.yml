@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  backend_a:
+    build: ./backend_a
+    container_name: myproject-backend-a
+    ports:
+      - "8001:8000"
+    volumes:
+      - ./pictures:/app/pictures # 公共图片
+      - ./backend_a/models_lo:/app/models_lo # ✅ 挂载模型
+      - ./backend_a/models_seg:/app/models_seg # ✅ 挂载模型
+    restart: unless-stopped
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    networks:
+      - app_net
+
+  backend_b:
+    build: ./backend_b
+    container_name: myproject-backend-b
+    ports:
+      - "8002:8000"
+    volumes:
+      - ./pictures:/app/pictures # 公共图片
+      - ./backend_b/model.pth:/app/model.pth:ro # ✅ 单文件模型
+    env_file:
+      - ./backend_b/.env
+    restart: unless-stopped
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    networks:
+      - app_net
+
+  frontend:
+    build: ./frontend
+    container_name: myproject-frontend
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html:ro
+    depends_on:
+      - backend_a
+      - backend_b
+    networks:
+      - app_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: myproject-nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/dist:/usr/share/nginx/html:ro
+      - ./pictures:/usr/share/nginx/html_root/pictures:ro
+    depends_on:
+      - frontend
+      - backend_a
+      - backend_b
+    networks:
+      - app_net
+
+networks:
+  app_net:
