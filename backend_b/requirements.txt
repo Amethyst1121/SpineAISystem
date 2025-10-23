@@ -1,0 +1,10 @@
+fastapi==0.116.2
+uvicorn==0.33.0
+numpy==1.22.0
+pillow==10.4.0
+opencv-python==4.12.0.88
+torch==2.1.0
+openai==1.109.1
+langchain-openai==0.1.25
+timm==0.4.12
+dotenv==0.9.9

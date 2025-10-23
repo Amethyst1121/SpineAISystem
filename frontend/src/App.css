@@ -1,0 +1,267 @@
+.app {
+  padding: 24px 24px 24px 24px;
+  font-family: Arial, sans-serif;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: bold;
+  color: black;
+  margin-bottom: 15px;
+  margin-top: 0;
+  font-family: "Microsoft YaHei", "Arial", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem; /* 左右间距 */
+  align-items: flex-start; /* 顶部对齐 */
+}
+
+/* 按钮工具栏 */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  background: #f3f3f3;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 700px;
+}
+
+.left-panel {
+  width: 1250px; /* 👈 固定宽度 */
+  flex-shrink: 0; /* 防止被压缩 */
+}
+
+.btn {
+  padding: 8px 10px;
+  border: none; /* 默认无边框 */
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  /* flex: 1; */
+  width: 160px;
+  min-width: 0;
+  background: #b1b087; /* 默认背景颜色，单独写每个按钮不同颜色 */
+  transition: background 0.2s;
+  position: relative;
+}
+
+.btn.c1 {
+  background: #b1b087;
+}
+
+.btn.c2 {
+  background: #8b9c6f;
+}
+
+.btn.c3 {
+  background: #6e9f9b;
+}
+
+.btn.c4 {
+  background: #65a7c9;
+}
+
+/* 小号上传方块 */
+.upload-box-inline {
+  width: 40px; /* 正方形 */
+  height: 40px;
+  border: 2px dashed #9ca3af;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #9ca3af; /* 灰色 + */
+  font-size: 45px;
+  font-weight: bold;
+  background: #f9fafb;
+  transition: background 0.2s ease;
+}
+
+.image-container {
+  display: flex;
+  align-items: flex-start; /* 顶部对齐 */
+}
+
+/* 图像展示框 */
+.image-box {
+  width: 700px;
+  height: 800px;
+  flex-shrink: 0; /* ✅ 不允许 flex 布局压缩 */
+  border: 2px solid #d1d5db;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafb;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.image-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* ✅ 保持比例缩放 */
+  display: block;
+}
+
+.placeholder {
+  color: #9ca3af;
+}
+
+/* 右侧竖排按钮 */
+.sidebar {
+  margin-left: 16px;
+  display: grid; /* ✅ 改为 grid */
+  grid-template-columns: repeat(2, 1fr); /* ✅ 两列 */
+  grid-auto-rows: 1fr; /* 👈 行高均分 */
+  height: 830px;
+  column-gap: 12px;
+}
+
+.small-btn {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ccc; /* 默认边框 */
+  border-radius: 6px;
+  background: #f3f3f3; /* 默认背景 */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.2s, background 0.2s, color 0.2s; /* 平滑过渡 */
+  --btn-color: #ccc; /* CSS 变量，从 JSX 传入 */
+}
+
+/* hover: 边框变色 + 加粗 */
+.small-btn:hover {
+  border-color: var(--btn-color);
+  border-width: 2px; /* hover 加粗 */
+}
+
+/* active: 背景和边框颜色都变成按钮颜色 */
+.small-btn.active {
+  background: var(--btn-color);
+  color: #fff;
+  border-color: var(--btn-color); /* 边框和背景颜色一致 */
+  border-width: 2px; /* 可以保持加粗，也可以改回 1px */
+}
+
+.small-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* ============================= */
+/* 🧩 右侧整体布局（骨折预测 + 报告生成） */
+/* ============================= */
+
+.right-panel {
+  flex: 1; /* 占据剩余空间 */
+  display: flex;
+  flex-direction: column;
+  gap: 20px !important;
+  padding: 0;
+}
+
+/* ============================= */
+/* 🎯 两个面板通用样式 */
+/* ============================= */
+
+.fracture-section,
+.report-section {
+  width: 700px;
+  height: 433px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f3f3f3;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: none !important;
+  box-sizing: border-box; /* ✅ 确保宽度包含 padding/border */
+}
+
+/* ============================= */
+/* 骨折显示区域 */
+/* ============================= */
+
+.result-panel {
+  background: #fff;
+  border-radius: 6px;
+  padding: 0.05rem 0.5rem; /* 边距 */
+  border: 1px solid #e0e0e0;
+  height: 350px;
+  overflow-y: auto;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  flex-wrap: wrap; /* 自动换行 */
+  justify-content: center; /* 居中对齐 */
+  align-content: flex-start; /* 内容从顶部开始 */
+  gap: 8px; /* 图片之间的间距 */
+}
+
+/* 🖼️ 每张图片的样式 */
+.fracture-img {
+  width: 120px;
+  height: 150px;
+  object-fit: cover; /* 图片按比例裁剪，填满框 */
+  border: none; /* 去掉边框 */
+  border-radius: 0; /* 无圆角 */
+  background: transparent;
+  flex: 0 0 auto;
+}
+
+/* ============================= */
+/* 报告显示区域 */
+/* ============================= */
+
+.report-panel {
+  background: #fff;
+  border-radius: 6px;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  height: 310px;
+  overflow-y: auto;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================= */
+/* 🔘 面板内部按钮 */
+/* ============================= */
+
+.btn.c5 {
+  background: #bf8f56;
+  top: -6px; /* ✅ 只对骨折预测按钮生效bf8f56 c8914d*/
+}
+
+.btn.c6 {
+  background: #a88486;
+  top: -6px; /* ✅ 只对报告生成按钮生效 */
+}
+
+/* ============================= */
+/* 🧾 与左侧的工具栏对齐感优化 */
+/* ============================= */
+.toolbar {
+  margin-bottom: 1.2rem;
+}

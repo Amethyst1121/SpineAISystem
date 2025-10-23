@@ -1,0 +1,11 @@
+fastapi==0.116.2
+uvicorn==0.33.0
+numpy==1.22.0
+scipy==1.10.1
+scikit-image==0.21.0
+tensorflow-gpu==2.10.0
+SimpleITK==2.3.1
+pydantic==2.10.6
+pillow==10.4.0
+pandas==2.0.3
+python-multipart==0.0.20

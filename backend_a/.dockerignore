@@ -1,0 +1,29 @@
+# 忽略Python缓存和临时文件
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.bak
+*.tmp
+
+# 忽略虚拟环境
+venv/
+.env/
+.env.bak/
+
+# 忽略IDE文件
+.vscode/
+.idea/
+*.iml
+
+# 忽略系统文件
+.DS_Store
+Thumbs.db
+
+# 忽略git
+.git/
+.gitignore
+
+# 不上传本地数据文件（如果不需要）
+pictures/
